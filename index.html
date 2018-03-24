@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson2</title>
+    <script>
+
+        //AJAX
+        //Синхронный запрос
+        console.log('---async---');
+        window.onload = function (address) {
+            this.address = './gallery.json';
+            var containerGallery = document.getElementById('gallery');
+
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', this.address, true); //Асинхронный запрос
+
+                xhr.onreadystatechange = function () {
+                    console.log(xhr.readyState);
+                    //0 - запрос не инициализирован
+                    //1 - загрузка
+                    //2 - запрос принят сервером
+                    //3 - обмен данными
+                    //4 - запрос выполнен
+                    if(xhr.readyState !== 4){
+                        return; //Выходим, если запрос еще выполняется
+                    }
+
+                    if(xhr.status !== 200)
+                    {
+                        console.log('Error', xhr.status, xhr.statusText);
+                    } else {
+                        var data = xhr.responseText;
+                        console.log('ok', data);
+                        var myGallery = JSON.parse(data);
+
+                            for (let i = 0; i < myGallery.length; i++) {
+
+                                var divElement = document.createElement('div');
+                                divElement.classList.add('img-container');
+                                var hrefElement = document.createElement('a');
+                                hrefElement.href = myGallery[i].max;
+                                hrefElement.target = "_blank";
+
+                                // создает новый обьект - image
+                                const galleryImage = new Image();
+                                // помещает картинку с товаром внутрь созданного image
+                                galleryImage.src = myGallery[i].min;
+                                hrefElement.appendChild(galleryImage);
+                                divElement.appendChild(hrefElement);
+                                containerGallery.appendChild(divElement);
+                            };
+                    }
+                };
+                xhr.send(); //Отправка самого запроса
+        };
+    </script>
+</head>
+<body>
+<div id="gallery"></div>
+</body>
+</html>

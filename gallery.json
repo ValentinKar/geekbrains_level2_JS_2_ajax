@@ -1,0 +1,14 @@
+[
+  {
+    "min": "./min/1.jpg",
+    "max": "./max/1.jpg"
+  },
+  {
+    "min": "./min/2.jpg",
+    "max": "./max/2.jpg"
+  },
+  {
+    "min": "./min/3.jpg",
+    "max": "./max/3.jpg"
+  }
+]
