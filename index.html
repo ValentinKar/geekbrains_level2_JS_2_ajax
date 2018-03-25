@@ -3,68 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Lesson2</title>
-    <script>
-
-
-        function buildImage(picture) {
-            // создает новый обьект - image
-            const galleryImage = new Image();
-            // помещает картинку с внутрь созданного image
-            galleryImage.src = picture;
-            return galleryImage;
-        }
-
-        function buildAnchor(reference) {
-            const anchorElement = document.createElement('a');
-            anchorElement.href = reference;
-            anchorElement.target = "_blank";
-            return anchorElement;
-        }
-
-        function buildDiv(className) {
-            var div = document.createElement('div');
-            div.classList.add(className);
-            return div;
-        }
-
-        //Синхронный запрос
-        console.log('---sync---');
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', './gallery.json', false); //false - Синхронный запрос
-        xhr.send();
-
-        if(xhr.status !== 200)
-        {
-            console.log('Error', xhr.status, xhr.statusText);
-        } else {
-            var data = xhr.responseText;
-            // console.log('ok', data);
-            var myGallery = JSON.parse(data);
-            // console.log(myGallery);
-            // console.log(myGallery.name);
-        }
-
-
-
-        window.onload = function () {
-            this.address = './gallery.json';
-            this.elementId = 'gallery';
-            this.myGallery =  myGallery;
-            this.classDivName = 'img-container';
-            var containerGallery = document.getElementById(this.elementId);
-
-            for (let i = 0; i < this.myGallery.length; i++) {
-                var divElement = buildDiv(this.classDivName); 
-                var hrefElement = buildAnchor(this.myGallery[i].max);
-    
-                hrefElement.appendChild(buildImage(this.myGallery[i].min));
-                divElement.appendChild(hrefElement);
-                containerGallery.appendChild(divElement);
-            };
-        };
-    </script>
+    <script src="gallery.js"></script>
+    <!-- <script src="async.js"></script> -->
 </head>
 <body>
 <div id="gallery"></div>
+<button id="btn1">Получить данные с сервера</button>
 </body>
 </html>
